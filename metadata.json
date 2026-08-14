@@ -1,0 +1,6 @@
+{
+  "name": "HydroVibe",
+  "description": "Official website, Privacy Policy, and Data Deletion guidelines for HydroVibe - Smart Hydration & Water Tracker.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
