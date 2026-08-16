@@ -4,14 +4,15 @@ import { ThemeMode, PrivacySectionData } from '../types';
 
 interface PrivacyPolicyProps {
   theme: ThemeMode;
+  onOpenDedicatedPage?: () => void;
 }
 
-export const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ theme }) => {
+export const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ theme, onOpenDedicatedPage }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [copiedLink, setCopiedLink] = useState(false);
 
   const handleCopyLink = () => {
-    navigator.clipboard.writeText(window.location.href.split('#')[0] + '#privacy-policy');
+    navigator.clipboard.writeText(window.location.origin + window.location.pathname + '#/privacy-policy');
     setCopiedLink(true);
     setTimeout(() => setCopiedLink(false), 2000);
   };
@@ -206,7 +207,16 @@ export const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ theme }) => {
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
+            {onOpenDedicatedPage && (
+              <button
+                onClick={onOpenDedicatedPage}
+                className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-md shadow-cyan-500/20 transition-all"
+              >
+                <ExternalLink className="w-3.5 h-3.5" />
+                <span>Open Dedicated Page</span>
+              </button>
+            )}
             <button
               onClick={handleCopyLink}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors"
